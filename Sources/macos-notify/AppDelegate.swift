@@ -96,12 +96,26 @@ final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCent
             ).first {
                 app.activate()
             } else {
-                // Try to launch the app
                 let config = NSWorkspace.OpenConfiguration()
                 if let appURL = NSWorkspace.shared.urlForApplication(
                     withBundleIdentifier: bundleID
                 ) {
-                    NSWorkspace.shared.openApplication(at: appURL, configuration: config)
+                    let exitCode: Int32 = success ? 0 : 1
+                    nonisolated(unsafe) let handler = completionHandler
+                    NSWorkspace.shared.openApplication(
+                        at: appURL, configuration: config
+                    ) { _, error in
+                        if let error = error {
+                            FileHandle.standardError.write(
+                                Data("Failed to launch \(bundleID): \(error.localizedDescription)\n".utf8)
+                            )
+                            handler()
+                            exit(1)
+                        }
+                        handler()
+                        exit(exitCode)
+                    }
+                    return
                 } else {
                     FileHandle.standardError.write(
                         Data("Could not find application with bundle ID: \(bundleID)\n".utf8)
