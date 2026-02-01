@@ -1,0 +1,3 @@
+[tools]
+"npm:@kimsungwhee/apple-docs-mcp" = "latest"
+"npm:xcodebuildmcp" = "latest"

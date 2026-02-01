@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "apple-docs": {
+      "type": "stdio",
+      "command": "apple-docs-mcp",
+      "args": [],
+      "env": {}
+    },
+    "XcodeBuildMCP": {
+      "type": "stdio",
+      "command": "xcodebuildmcp",
+      "args": [],
+      "env": {}
+    }
+  }
+}
