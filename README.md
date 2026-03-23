@@ -1,5 +1,8 @@
 # macos-notify
 
+> [!WARNING]
+> **Work in progress!** It works well, but I haven't published a release, set up the CI/CD plumbing, or documented it yet. 😅
+
 A command-line tool for sending macOS notifications with click actions.
 
 Built with Swift and `UNUserNotificationCenter` (available since macOS 10.14) — the modern macOS notification framework that replaces `NSUserNotification`. Apple deprecated `NSUserNotification` in macOS 11.0, and while the API is still present, it no longer receives fixes. Tools built on it (like [terminal-notifier](https://github.com/julienXX/terminal-notifier)) still deliver notifications on current macOS versions but have broken user interactions — clicking notifications may not trigger actions, and a spurious "Show" button can appear. `macos-notify` is a from-scratch alternative for anyone who needs a reliable, scriptable notification CLI on modern macOS.
